@@ -1,0 +1,4 @@
+# See https://github.com/anhaidgroup/py_entitymatching/issues/122
+# Note: needs to be built in correct py environment
+python setup.py build_ext --inplace
+python setup.py install
