@@ -42,7 +42,7 @@ class OverlapBlocker(Blocker):
                      l_output_attrs=None, r_output_attrs=None,
                      l_output_prefix='ltable_', r_output_prefix='rtable_',
                      allow_missing=False, verbose=False, show_progress=True,
-                     n_jobs=1):
+                     n_jobs=1, padding=False):
         """
         Blocks two tables based on the overlap of token sets of attribute
          values.
@@ -113,6 +113,7 @@ class OverlapBlocker(Blocker):
                 If (n_cpus + 1 + n_jobs) is less than 1, then no parallel
                 computation is used (i.e., equivalent to the default).
 
+            padding (bool): add # to beginning and end of string
 
         Returns:
             A candidate set of tuple pairs that survived blocking (DataFrame).
@@ -269,7 +270,7 @@ class OverlapBlocker(Blocker):
             tokenizer = WhitespaceTokenizer(return_set=True)
         else:
             # # # create a qgram tokenizer 
-            tokenizer = QgramTokenizer(qval=q_val, return_set=True)
+            tokenizer = QgramTokenizer(qval=q_val, return_set=True, padding=padding)
 
         # # perform overlap similarity join
         candset = overlap_join(l_df, r_df, l_key, r_key, l_dummy_overlap_attr,
